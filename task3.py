@@ -4,7 +4,7 @@ def isDividingNumber(num):
         d = n % 10
         if (d == 0) or (num % d != 0):
             return False
-        n = n//10
+        n = n // 10
     return True
 
 
