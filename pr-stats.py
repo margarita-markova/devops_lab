@@ -80,8 +80,9 @@ args = parser.parse_args()
 github_session = requests.Session()
 github_session.auth = (args.user, get_token())
 
-url_request = requests.get("https://api.github.com/repos/" + args.user +
-                           "/" + args.repo + "/pulls/" + str(args.num))
+url = "https://api.github.com/repos/" + args.user
+url = url + "/" + args.repo + "/pulls/" + str(args.num)
+url_request = requests.get(url)
 if url_request.status_code is not requests.codes.ok:
     print('Problems with page loading. Error code: ', url_request.status_code)
     quit()
