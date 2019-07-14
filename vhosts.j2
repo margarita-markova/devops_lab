@@ -1,0 +1,14 @@
+NameVirtualHost *:80
+{% for vhost in apache_vhosts %}
+<VirtualHost *:80>
+  ServerName {{ vhost.servername }}
+  DocumentRoot {{ vhost.documentroot }}
+  {% if serveradmin %}ServerAdmin  {{ vhost.serveradmin }} {% endif %}
+  <Directory "{{ vhost.directorypath }}">
+     AllowOverride All
+     Options Indexes FollowSymLinks
+     Order allow,deny
+     Allow from all
+  </Directory>
+</VirtualHost>
+{% endfor %}
