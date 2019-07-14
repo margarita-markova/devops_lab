@@ -11,4 +11,4 @@ template = Template(template_html)
 vhosts_conf = template.render(config_data)
 
 with open('vhosts.conf', 'w') as vhosts_file:
-vhosts_file.write(vhosts_conf)
+    vhosts_file.write(vhosts_conf)
