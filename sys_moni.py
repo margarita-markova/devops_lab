@@ -32,24 +32,24 @@ class SystemMonitor:
         info['snapshot'] = self.shot_num
         info['timestamp'] = datetime.datetime.now()
         info['cpu'] = {
-                'percent': psutil.cpu_percent(percpu=True),
-                'loadavg': psutil.getloadavg(),
+            'percent': psutil.cpu_percent(percpu=True),
+            'loadavg': psutil.getloadavg(),
         }
 
         vm_info = psutil.virtual_memory()
         info['vmem'] = {
-                'total': vm_info.total,
-                'used': vm_info.used,
-                'free': vm_info.free,
-                'percent': round(vm_info.used / vm_info.total * 100, 2),
+            'total': vm_info.total,
+            'used': vm_info.used,
+            'free': vm_info.free,
+            'percent': round(vm_info.used / vm_info.total * 100, 2),
         }
 
         swap_info = psutil.swap_memory()
         info['swap'] = {
-                'total': swap_info.total,
-                'used': swap_info.used,
-                'free': swap_info.free,
-                'percent': swap_info.percent,
+            'total': swap_info.total,
+            'used': swap_info.used,
+            'free': swap_info.free,
+            'percent': swap_info.percent,
         }
 
         info['disk_usage'] = {}
@@ -64,22 +64,22 @@ class SystemMonitor:
 
         io_info = psutil.disk_io_counters(perdisk=True)
         info['disk_io'] = {k: {
-                'read_count': v.read_count,
-                'write_count': v.write_count,
-                'read_bytes': v.read_bytes,
-                'write_bytes': v.write_bytes,
-            } for k, v in io_info.items()
+            'read_count': v.read_count,
+            'write_count': v.write_count,
+            'read_bytes': v.read_bytes,
+            'write_bytes': v.write_bytes,
+        } for k, v in io_info.items()
         }
 
         net_io = psutil.net_io_counters(pernic=True)
         info['net_io'] = {k: {
-                'bytes_sent': v.bytes_sent,
-                'bytes_recv': v.bytes_recv,
-                'packets_sent': v.packets_sent,
-                'packets_recv': v.packets_recv,
-                'errin': v.errin,
-                'errout': v.errout,
-            } for k, v in net_io.items()
+            'bytes_sent': v.bytes_sent,
+            'bytes_recv': v.bytes_recv,
+            'packets_sent': v.packets_sent,
+            'packets_recv': v.packets_recv,
+            'errin': v.errin,
+            'errout': v.errout,
+        } for k, v in net_io.items()
         }
 
         return info
@@ -179,7 +179,7 @@ def get_last_line(path):
 
 def main():
     parser = argparse.ArgumentParser(description='Monitor your system.',
-                                     epilog='CML params have higher' +
+                                     epilog='CML params have higher'
                                      'priority than config.')
     parser.add_argument('-c', '--config', dest='config',
                         default=DEFAULT_CONFIG_PATH, help='configuration file')
